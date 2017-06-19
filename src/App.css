@@ -1,0 +1,13 @@
+html,
+body,
+#root,
+.App {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  background-color: #eeeeee;
+}
+
+.App-intro {
+  font-size: large;
+}
