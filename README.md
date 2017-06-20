@@ -6,7 +6,7 @@
 This is an example of a react-motion POC Kanban implementation I wrote for an internal project.
 The code is relatively easy to look at, and the `<List />` component can just take more/less arrays as properties.
 
-![preview](https://github.com/hanford/react-motion-kanban/blob/master/example.gif+)
+![preview](https://github.com/hanford/react-motion-kanban/blob/master/example.gif)
 
 
 TODO:
