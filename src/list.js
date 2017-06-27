@@ -11,8 +11,8 @@ export default class List extends PureComponent {
   layout = null
   width = null
 
-  height = 100
-  columnWidth = 100
+  height = this.props.height || 100
+  columnWidth = this.props.columnWidth || 100
 
   state = {
     mouse: [0, 0],
@@ -20,15 +20,11 @@ export default class List extends PureComponent {
     lastPress: null, // key of the last pressed component
     currentColumn: null,
     isPressed: false,
-    order: [
-      this.props.array1,
-      this.props.array2,
-      this.props.array3
-    ]
+    order: this.props.items
   }
 
   componentWillMount () {
-    this.calculateVisiblePositions(this.state.order)
+    this.calculatePositions(this.state.order)
   }
 
   componentDidMount () {
@@ -38,7 +34,9 @@ export default class List extends PureComponent {
   }
 
   reinsert = (array, colFrom, rowFrom, colTo, rowTo) => {
-    const _array = array.slice(0)
+    // we don't want to mutate array
+    const _array = [...array]
+
     const val = _array[colFrom][rowFrom]
 
     if (_array[colFrom] && _array[colTo]) {
@@ -46,12 +44,12 @@ export default class List extends PureComponent {
       _array[colTo].splice(rowTo, 0, val)
     }
 
-    this.calculateVisiblePositions(_array)
+    this.calculatePositions(_array)
 
     return _array
   }
 
-  calculateVisiblePositions = newOrder => {
+  calculatePositions = newOrder => {
     this.layout = newOrder.map((column, col) => {
       return range(column.length + 1).map((item, row) => {
         return [this.columnWidth * col, this.height * row]

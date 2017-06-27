@@ -15,12 +15,10 @@ class App extends Component {
     return (
       <div className="App">
 
-        <h2>React Motion Kanban</h2>
+        <h2>React Kanban</h2>
 
         <List
-          array1={array1}
-          array2={array2}
-          array3={array3}
+          items={[array1, array2, array3]}
         />
       </div>
     )
