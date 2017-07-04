@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 
+import GithubBadge from './github-badge'
 import List from './list'
 
 class App extends Component {
@@ -14,6 +15,11 @@ class App extends Component {
 
     return (
       <div className="App">
+
+        <GithubBadge
+          url='https://github.com/hanford/react-kanban'
+          title='Star on Github'
+        />
 
         <h2>React Kanban</h2>
 
