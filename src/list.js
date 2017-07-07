@@ -31,6 +31,9 @@ export default class List extends PureComponent {
     // for some reason, much more performant than on the actual element using react's bindings
     window.addEventListener('mousemove', this.handleMouseMove)
     window.addEventListener('mouseup', this.handleMouseUp)
+
+    window.addEventListener('touchmove', this.handleTouchMove)
+    window.addEventListener('touchend', this.handleMouseUp)
   }
 
   reinsert = (array, colFrom, rowFrom, colTo, rowTo) => {
@@ -55,6 +58,16 @@ export default class List extends PureComponent {
         return [this.columnWidth * col, this.height * row]
       })
     })
+  }
+
+  handleTouchMove = event => {
+    event.preventDefault()
+
+    this.handleMouseMove(event.touches[0])
+  }
+
+  handleTouchStart = (key, currentColumn, pressLocation, event) => {
+    this.handleMouseDown(key, currentColumn, pressLocation, event.touches[0])
   }
 
   handleMouseMove = ({ pageX, pageY }) => {
@@ -105,9 +118,8 @@ export default class List extends PureComponent {
 
     return column.map((row, index) => {
       let style
-      let x
-      let y
-      let visualPosition = order[colIndex].indexOf(row)
+      let x, y = 0
+      let position = order[colIndex].indexOf(row)
       let isActive = (row === lastPress && colIndex === currentColumn && isPressed)
 
       if (isActive) {
@@ -119,7 +131,7 @@ export default class List extends PureComponent {
           scale: spring(1.15, presets.wobbly),
         }
       } else {
-        [x, y] = this.layout[colIndex][visualPosition]
+        [x, y] = this.layout[colIndex][position]
 
         style = {
           shadow: spring(2),
@@ -134,10 +146,11 @@ export default class List extends PureComponent {
           {({translateX, translateY, scale, shadow}) => (
             <div
               onMouseDown={this.handleMouseDown.bind(null, row, colIndex, [x, y])}
+              onTouchStart={this.handleTouchStart.bind(null, row, colIndex, [x, y])}
               className='item'
               style={{
                 transform: `translate3d(${translateX}px, ${translateY}px, ${translateY}px) scale(${scale})`,
-                zIndex: (row === lastPress && colIndex === currentColumn) ? 99 : visualPosition,
+                zIndex: (row === lastPress && colIndex === currentColumn) ? 99 : position,
                 boxShadow: `rgba(0, 0, 0, 0.2) 0px ${shadow}px ${2 * shadow}px`,
                 cursor: isActive ? '-webkit-grabbing' : '-webkit-grab'
               }}
