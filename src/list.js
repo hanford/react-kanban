@@ -151,7 +151,7 @@ export default class List extends PureComponent {
   }
 
   render () {
-    const { order, lastPress, currentColumn, isPressed, mouse } = this.state
+    const { order } = this.state
 
     return (
       <div className='list-container'>
