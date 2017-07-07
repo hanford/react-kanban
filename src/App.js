@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 
-import GithubBadge from './github-badge'
+import GithubBadge from 'react-github-badge'
 import List from './list'
 
 class App extends Component {
