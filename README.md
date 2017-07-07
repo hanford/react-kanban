@@ -1,6 +1,6 @@
 ### React Kanban
 
-[Live example!](https://react-motion-kanban-gfyinuzipl.now.sh)  
+[Live example!](https://react-kanban.jackhanford.com)  
 (the example might need to wake up, which will take ~10-15 seconds)
 
 This is an example of a react-motion POC Kanban implementation I wrote for an internal project.
