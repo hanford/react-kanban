@@ -168,11 +168,7 @@ export default class List extends PureComponent {
 
     return (
       <div className='list-container'>
-        {
-          order.map((o, index) => {
-            return this.renderColumn(o, index)
-          })
-        }
+        {order.map(this.renderColumn)}
       </div>
     )
   }
